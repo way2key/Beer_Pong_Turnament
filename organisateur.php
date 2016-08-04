@@ -134,7 +134,8 @@
 			//Deuxième manche
 			$poolst2=array();
 			//répartition des équipes dans les pools au 2eme tour
-			if(!empty($_SESSION['teamm2'])&&$test>=4){
+			if(isset($_SESSION['teamm2'])){$count=count($_SESSION['teamm2']);}
+			if(!empty($_SESSION['teamm2'])&&$test>=4&&$count==$m2){
 				if($m2%2==0){
 					$j=0;
 					for($i=0;$i<($m3);$i++){
@@ -252,7 +253,8 @@
 			//Troisième manche
 			$poolst3=array();
 			//répartition des équipes dans les pools au 3eme tour
-			if(!empty($_SESSION['teamm3'])&&$test>=4){
+			if(isset($_SESSION['teamm3'])){$count=count($_SESSION['teamm3']);}
+			if(!empty($_SESSION['teamm3'])&&$test>=4&&$count==$m3){
 				if($m3%2==0){
 					$j=0;
 					for($i=0;$i<($m3/2);$i++){
@@ -371,7 +373,8 @@
 			//Quattrième manche
 			$poolst4=array();
 			//répartition des équipes dans les pools au 4eme tour
-			if(!empty($_SESSION['teamm4'])&&$test>=4){
+			if(isset($_SESSION['teamm4'])){$count=count($_SESSION['teamm4']);}
+			if(!empty($_SESSION['teamm4'])&&$test>=4&&$count==$m4){
 				if($m4%2==0){
 					$j=0;
 					for($i=0;$i<($m4/2);$i++){
@@ -394,11 +397,11 @@
 					}
 					// questionnaire sur les qualifications du T4:
 					echo "<h2>Tour 4: </h2><br><form method='post'>";
-					if(empty($_POST['t3'])){$_POST['t3']=[];}
+					if(empty($_POST['t4'])){$_POST['t4']=[];}
 					for($i=0;$i<$m4/2;$i++){
 						echo $poolst4[$i][0]." VS ".$poolst4[$i][1],"<br>";
 						echo "<input type='checkbox' name='t4[]' value='",$poolst4[$i][0],"' ",notempty4($_POST['t4'],$poolst4[$i][0]),"> ",$poolst4[$i][0],"<br>";
-						echo "<input type='checkbox' name='t4[]' value='",$poolst4[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst4[$i][1],"<br>";
+						echo "<input type='checkbox' name='t4[]' value='",$poolst4[$i][1],"' ",notempty4($_POST['t4'],$poolst4[$i][1]),"> ",$poolst4[$i][1],"<br>";
 					}
 					echo "<input type='submit' name='Qui a gagné?'></form><br><br><br>";
 				}else{
@@ -444,6 +447,7 @@
 		<?php
 		//Gestion des pools
 		//t1
+		/*
 		$t1=count($poolst1);
 		for($i=0;$i<$t1;$i++){
 			var_dump($poolst1[$i]);
@@ -475,7 +479,7 @@
 			for($j=0;$j<count($poolst4[$j]);$j++){
 				echo $j;
 			}
-		}
+		}*/
 		?>
 	</body>
 </html>
