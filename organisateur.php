@@ -41,16 +41,14 @@
 					$j++;
 				}
 				// questionnaire sur les qualifications du T1:
-				echo "<h2>Tour 1: </h2><br><form method='post'>";
+				echo "<div id='t1'><h2>Tour 1: </h2><br><form method='post'>";
 				for($i=0;$i<$m1/2;$i++){
 					if(empty($_POST['t1'])){$_POST['t1']=[];}
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][1],"<br>";
-					echo "<input type='checkbox' name='t1[]' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='checkbox' name='t1[]' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
-					//if(!empty($_POST['t1'])){echo (in_array($poolst1[$i][0], $_POST['t1']))? 'checked':'';}
-
+					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
 				}
-				echo "<input type='submit' name='Qui a gagné?'></form>";
+				echo "<input type='submit' name='Qui a gagné?'></form></div>";
 				if(!empty($_POST['t1'])){
 						$teamm2=$_POST['t1'];
 						$_SESSION['teamm2']=$_POST['t1'];
@@ -89,28 +87,28 @@
 					}		
 				}
 				// questionnaire sur les qualifications du T1:
-				echo "<h2>Tour 1: </h2><br><form method='post'>";
+				echo "<div id='t1'><h2>Tour 1: </h2><br><form method='post'>";
 				if(empty($_POST['t1'])){$_POST['t1']=[];}
 				for($i=0;$i<($m1-3)/2;$i++){
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][1],"<br>";
-					echo "<input type='checkbox' name='t1[]' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='checkbox' name='t1[]' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
 				}
 				for($i=($m1-3)/2;$i<(($m1-3)/2)+1;$i++){
-					
+					$p=$i+1;
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][1],"<br>";
-					echo "<input type='checkbox' name='ti1[]' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='checkbox' name='ti1[]' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='ti1[]",$p,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='ti1[]",$p,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
 
 					echo $poolst1[$i][1]." VS ".$poolst1[$i][2],"<br>";
-					echo "<input type='checkbox' name='ti1[]' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
-					echo "<input type='checkbox' name='ti1[]' value='",$poolst1[$i][2],"' ",notempty1($_POST['t1'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
+					echo "<input type='radio' name='ti1[]",$p+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='ti1[]",$p+1,"' value='",$poolst1[$i][2],"' ",notempty1($_POST['t1'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
 
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][2],"<br>";
-					echo "<input type='checkbox' name='ti1[]' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='checkbox' name='ti1[]' value='",$poolst1[$i][2],"' ",notempty1($_POST['t1'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
+					echo "<input type='radio' name='ti1[]",$p+2,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='ti1[]",$p+2,"' value='",$poolst1[$i][2],"' ",notempty1($_POST['t1'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
 				}
-				echo "<input type='submit' name='Qui a gagné?'></form>";
+				echo "<input type='submit' name='Qui a gagné?'></form></div>";
 
 				if(!empty($_POST['ti1'])){
 					$ti1=$_POST['ti1'];
@@ -156,14 +154,14 @@
 						$j++;
 					}
 					// questionnaire sur les qualifications du T2:
-					echo "<h2>Tour 2: </h2><br><form method='post'>";
+					echo "<div id='t2'><h2>Tour 2: </h2><br><form method='post'>";
 					if(empty($_POST['t2'])){$_POST['t2']=[];}
 					for($i=0;$i<$m2/2;$i++){
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
-						echo "<input type='checkbox' name='t2[]' value='",$poolst2[$i][0],"' ",notempty2($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-						echo "<input type='checkbox' name='t2[]' value='",$poolst2[$i][1],"' ",notempty2($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+						echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
 					}
-					echo "<input type='submit' name='Qui a gagné?'></form><br>";
+					echo "<input type='submit' name='Qui a gagné?'></form><br></div>";
 					if(!empty($_POST['t2'])){
 						$teamm3=$_POST['t2'];
 						$_SESSION['teamm3']=$_POST['t2'];
@@ -202,33 +200,33 @@
 						}		
 					}
 					// questionnaire sur les qualifications du T2:
-					echo "<h2>Tour 2: </h2><br><form method='post'>";
+					echo "<div id='t2'><h2>Tour 2: </h2><br><form method='post'>";
 					if($m2>3){
 						if(empty($_POST['t2'])){$_POST['t2']=[];}
 						for($i=0;$i<($m2-3)/2;$i++){
 							echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
-							echo "<input type='checkbox' name='t2[]' value='",$poolst2[$i][0],"' ",notempty2($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-							echo "<input type='checkbox' name='t2[]' value='",$poolst2[$i][1],"' ",notempty2($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+							echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+							echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
 						}
 					}else{
 					$_POST['t2']=[];
 					}
 					if(empty($_POST['ti2'])){$_POST['ti2']=[];}
 					for($i=($m2-3)/2;$i<(($m2-3)/2)+1;$i++){
-						
+						$p=$i+1;
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
-						echo "<input type='checkbox' name='ti2[]' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-						echo "<input type='checkbox' name='ti2[]' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						echo "<input type='radio' name='ti2[]",$p,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+						echo "<input type='radio' name='ti2[]",$p,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
 
 						echo $poolst2[$i][1]." VS ".$poolst2[$i][2],"<br>";
-						echo "<input type='checkbox' name='ti2[]' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
-						echo "<input type='checkbox' name='ti2[]' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti2'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
+						echo "<input type='radio' name='ti2[]",$p+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						echo "<input type='radio' name='ti2[]",$p+1,"' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti2'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
 
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][2],"<br>";
-						echo "<input type='checkbox' name='ti2[]' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-						echo "<input type='checkbox' name='ti2[]' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti2'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
+						echo "<input type='radio' name='ti2[]",$p+2,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+						echo "<input type='radio' name='ti2[]",$p+2,"' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti2'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
 					}
-					echo "<input type='submit' name='Qui a gagné?'></form>";
+					echo "<input type='submit' name='Qui a gagné?'></form></div>";
 					if(!empty($_POST['ti2'])){
 						$ti2=$_POST['ti2'];
 						$a=array_count_values($ti2);
@@ -276,14 +274,14 @@
 						$j++;
 					}	
 					// questionnaire sur les qualifications du T3:
-					echo "<h2>Tour 3: </h2><br><form method='post'>";
+					echo "<div id='t3'><h2>Tour 3: </h2><br><form method='post'>";
 					if(empty($_POST['t3'])){$_POST['t3']=[];}
 					for($i=0;$i<$m3/2;$i++){
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
-						echo "<input type='checkbox' name='t3[]' value='",$poolst3[$i][0],"' ",notempty3($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-						echo "<input type='checkbox' name='t3[]' value='",$poolst3[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+						echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
 					}
-					echo "<input type='submit' name='Qui a gagné?'></form>";
+					echo "<input type='submit' name='Qui a gagné?'></form></div>";
 					if(!empty($_POST['t3'])){
 						$teamm4=$_POST['t3'];
 						$_SESSION['teamm4']=$teamm4;
@@ -322,34 +320,34 @@
 						}		
 					}
 					// questionnaire sur les qualifications du T3:
-					echo "<h2>Tour 3: </h2><br><form method='post'>";
+					echo "<div id='t3'><h2>Tour 3: </h2><br><form method='post'>";
 					if($m3>3){
 						if(empty($_POST['t3'])){$_POST['t3']=[];}
 						for($i=0;$i<($m3-3)/2;$i++)
 						{
 							echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
-							echo "<input type='checkbox' name='t3[]' value='",$poolst3[$i][0],"' ",notempty3($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-							echo "<input type='checkbox' name='t3[]' value='",$poolst3[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+							echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+							echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
 						}
 					}else{
 						$_POST['t3']=[];
 					}
 					if(empty($_POST['ti3'])){$_POST['ti3']=[];}
 					for($i=($m3-3)/2;$i<(($m3-3)/2)+1;$i++){
-						
+						$p=$i+1;
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
-						echo "<input type='checkbox' name='ti3[]' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-						echo "<input type='checkbox' name='ti3[]' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						echo "<input type='radio' name='ti3[]",$p,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+						echo "<input type='radio' name='ti3[]",$p,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
 
 						echo $poolst3[$i][1]." VS ".$poolst3[$i][2],"<br>";
-						echo "<input type='checkbox' name='ti3[]' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
-						echo "<input type='checkbox' name='ti3[]' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti3'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
+						echo "<input type='radio' name='ti3[]",$p+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						echo "<input type='radio' name='ti3[]",$p+1,"' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti3'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
 
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][2],"<br>";
-						echo "<input type='checkbox' name='ti3[]' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-						echo "<input type='checkbox' name='ti3[]' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti3'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
+						echo "<input type='radio' name='ti3[]",$p+2,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+						echo "<input type='radio' name='ti3[]",$p+2,"' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti3'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
 					}
-					echo "<input type='submit' name='Qui a gagné?'></form>";
+					echo "<input type='submit' name='Qui a gagné?'></form></div>";
 					if(!empty($_POST['ti3'])){
 						$ti3=$_POST['ti3'];
 						$a=array_count_values($ti3);
@@ -396,14 +394,14 @@
 						$j++;
 					}
 					// questionnaire sur les qualifications du T4:
-					echo "<h2>Tour 4: </h2><br><form method='post'>";
+					echo "<div id='t4'><h2>Tour 4: </h2><br><form method='post'>";
 					if(empty($_POST['t4'])){$_POST['t4']=[];}
 					for($i=0;$i<$m4/2;$i++){
 						echo $poolst4[$i][0]." VS ".$poolst4[$i][1],"<br>";
-						echo "<input type='checkbox' name='t4[]' value='",$poolst4[$i][0],"' ",notempty4($_POST['t4'],$poolst4[$i][0]),"> ",$poolst4[$i][0],"<br>";
-						echo "<input type='checkbox' name='t4[]' value='",$poolst4[$i][1],"' ",notempty4($_POST['t4'],$poolst4[$i][1]),"> ",$poolst4[$i][1],"<br>";
+						echo "<input type='radio' name='t4[]",$i+1,"' value='",$poolst4[$i][0],"' ",notempty4($_POST['t4'],$poolst4[$i][0]),"> ",$poolst4[$i][0],"<br>";
+						echo "<input type='radio' name='t4[]",$i+1,"' value='",$poolst4[$i][1],"' ",notempty4($_POST['t4'],$poolst4[$i][1]),"> ",$poolst4[$i][1],"<br>";
 					}
-					echo "<input type='submit' name='Qui a gagné?'></form><br><br><br>";
+					echo "<input type='submit' name='Qui a gagné?'></form></div>";
 				}else{
 					$j=0;
 					for($i=0;$i<(floor($m4/2)-1);$i++){
