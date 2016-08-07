@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Management of the Turnament</title>
+		<title>Management of the Tournament</title>
 		<meta charset="utf-8"> 
 	</head>
 	<body>
