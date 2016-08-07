@@ -94,34 +94,42 @@
 					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
 					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
 				}
+				if(empty($_POST['ti11'])){$_POST['ti11']=[];}
+				if(empty($_POST['ti12'])){$_POST['ti12']=[];}
+				if(empty($_POST['ti13'])){$_POST['ti13']=[];}
 				for($i=($m1-3)/2;$i<(($m1-3)/2)+1;$i++){
 					$p=$i+1;
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][1],"<br>";
-					echo "<input type='radio' name='ti1[]",$p,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='radio' name='ti1[]",$p,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='ti11[]",$p,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['ti11'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='ti11[]",$p,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['ti11'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
 
 					echo $poolst1[$i][1]." VS ".$poolst1[$i][2],"<br>";
-					echo "<input type='radio' name='ti1[]",$p+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
-					echo "<input type='radio' name='ti1[]",$p+1,"' value='",$poolst1[$i][2],"' ",notempty1($_POST['t1'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
+					echo "<input type='radio' name='ti12[]",$p+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['ti12'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='ti12[]",$p+1,"' value='",$poolst1[$i][2],"' ",notempty1($_POST['ti12'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
 
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][2],"<br>";
-					echo "<input type='radio' name='ti1[]",$p+2,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='radio' name='ti1[]",$p+2,"' value='",$poolst1[$i][2],"' ",notempty1($_POST['t1'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
+					echo "<input type='radio' name='ti13[]",$p+2,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['ti13'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='ti13[]",$p+2,"' value='",$poolst1[$i][2],"' ",notempty1($_POST['ti13'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
 				}
 				echo "<input type='submit' name='Qui a gagné?'></form></div>";
-
-				if(!empty($_POST['ti1'])){
-					$ti1=$_POST['ti1'];
-					$a=array_count_values($ti1);
-					if(max($a)==1){
+				if(!empty($_POST['ti11'])&&!empty($_POST['ti12'])&&!empty($_POST['ti13'])){
+					$ti11=$_POST['ti11'];
+					$ti12=$_POST['ti12'];
+					$ti13=$_POST['ti13'];
+					$a=array_count_values($ti11);
+					$b=array_count_values($ti12);
+					$c=array_count_values($ti13);
+					$total=array_merge($ti11,$ti12,$ti13);
+					$vovo=array_count_values($total);
+					if(max($vovo)==1){
 						$teamm2=$_POST['t1'];
-						$teamm2[]=$ti1[rand(0,2)];
+						$teamm2[]=$total[rand(0,2)];
 						$_SESSION['teamm2']=$teamm2;					
 					}
 					else{
-						$b=array_search(max($a),$a);
+						$d=array_search(max($vovo),$vovo);
 						$teamm2=$_POST['t1'];
-						$teamm2[]=$b;
+						$teamm2[]=$d;
 						$_SESSION['teamm2']=$teamm2;
 					}
 				}
@@ -211,36 +219,43 @@
 					}else{
 					$_POST['t2']=[];
 					}
-					if(empty($_POST['ti2'])){$_POST['ti2']=[];}
+					if(empty($_POST['ti21'])){$_POST['ti21']=[];}
+					if(empty($_POST['ti22'])){$_POST['ti22']=[];}
+					if(empty($_POST['ti23'])){$_POST['ti23']=[];}
 					for($i=($m2-3)/2;$i<(($m2-3)/2)+1;$i++){
 						$p=$i+1;
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
-						echo "<input type='radio' name='ti2[]",$p,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-						echo "<input type='radio' name='ti2[]",$p,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						echo "<input type='radio' name='ti21[]",$p,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti21'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+						echo "<input type='radio' name='ti21[]",$p,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti21'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
 
 						echo $poolst2[$i][1]." VS ".$poolst2[$i][2],"<br>";
-						echo "<input type='radio' name='ti2[]",$p+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
-						echo "<input type='radio' name='ti2[]",$p+1,"' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti2'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
+						echo "<input type='radio' name='ti22[]",$p+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti22'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						echo "<input type='radio' name='ti22[]",$p+1,"' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti22'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
 
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][2],"<br>";
-						echo "<input type='radio' name='ti2[]",$p+2,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-						echo "<input type='radio' name='ti2[]",$p+2,"' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti2'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
+						echo "<input type='radio' name='ti23[]",$p+2,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti23'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+						echo "<input type='radio' name='ti23[]",$p+2,"' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti23'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
 					}
 					echo "<input type='submit' name='Qui a gagné?'></form></div>";
-					if(!empty($_POST['ti2'])){
-						$ti2=$_POST['ti2'];
-						$a=array_count_values($ti2);
-						if(max($a)==1){
+					if(!empty($_POST['ti21'])&&!empty($_POST['ti22'])&&!empty($_POST['ti23'])){
+						$ti21=$_POST['ti21'];
+						$ti22=$_POST['ti22'];
+						$ti23=$_POST['ti23'];
+						$a=array_count_values($ti21);
+						$b=array_count_values($ti22);
+						$c=array_count_values($ti23);
+						$total=array_merge($ti21,$ti22,$ti23);
+						$vovo=array_count_values($total);
+						if(max($vovo)==1){
 							$teamm3=$_POST['t2'];
-							$teamm3[]=$ti2[rand(0,2)];
-							$_SESSION['teamm3']=$teamm3;
+							$teamm3[]=$total[rand(0,2)];
+							$_SESSION['teamm3']=$teamm3;					
 						}
 						else{
-							$b=array_search(max($a),$a);
+							$d=array_search(max($vovo),$vovo);
 							$teamm3=$_POST['t2'];
-							$teamm3[]=$b;
+							$teamm3[]=$d;
 							$_SESSION['teamm3']=$teamm3;
-							
 						}
 					}
 				}
@@ -332,35 +347,43 @@
 					}else{
 						$_POST['t3']=[];
 					}
-					if(empty($_POST['ti3'])){$_POST['ti3']=[];}
+					if(empty($_POST['ti31'])){$_POST['ti31']=[];}
+					if(empty($_POST['ti32'])){$_POST['ti32']=[];}
+					if(empty($_POST['ti33'])){$_POST['ti33']=[];}
 					for($i=($m3-3)/2;$i<(($m3-3)/2)+1;$i++){
 						$p=$i+1;
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
-						echo "<input type='radio' name='ti3[]",$p,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-						echo "<input type='radio' name='ti3[]",$p,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						echo "<input type='radio' name='ti31[]",$p,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti31'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+						echo "<input type='radio' name='ti31[]",$p,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti31'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
 
 						echo $poolst3[$i][1]." VS ".$poolst3[$i][2],"<br>";
-						echo "<input type='radio' name='ti3[]",$p+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
-						echo "<input type='radio' name='ti3[]",$p+1,"' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti3'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
+						echo "<input type='radio' name='ti32[]",$p+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti32'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						echo "<input type='radio' name='ti32[]",$p+1,"' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti32'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
 
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][2],"<br>";
-						echo "<input type='radio' name='ti3[]",$p+2,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-						echo "<input type='radio' name='ti3[]",$p+2,"' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti3'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
+						echo "<input type='radio' name='ti33[]",$p+2,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti33'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+						echo "<input type='radio' name='ti33[]",$p+2,"' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti33'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
 					}
 					echo "<input type='submit' name='Qui a gagné?'></form></div>";
-					if(!empty($_POST['ti3'])){
-						$ti3=$_POST['ti3'];
-						$a=array_count_values($ti3);
-						if(max($a)==1){
+					if(!empty($_POST['ti31'])&&!empty($_POST['ti32'])&&!empty($_POST['ti33'])){
+						$ti31=$_POST['ti31'];
+						$ti32=$_POST['ti32'];
+						$ti33=$_POST['ti33'];
+						$a=array_count_values($ti31);
+						$b=array_count_values($ti32);
+						$c=array_count_values($ti33);
+						$total=array_merge($ti31,$ti32,$ti33);
+						$vovo=array_count_values($total);
+						if(max($vovo)==1){
 							$teamm4=$_POST['t3'];
-							$teamm4[]=$ti3[rand(0,2)];
-							$_SESSION['teamm4']=$teamm4;
+							$teamm4[]=$total[rand(0,2)];
+							$_SESSION['teamm4']=$teamm4;					
 						}
 						else{
-							$b=array_search(max($a),$a);
+							$d=array_search(max($vovo),$vovo);
 							$teamm4=$_POST['t3'];
-							$teamm4[]=$b;
-							$_SESSION['teamm4']=$teamm4;	
+							$teamm4[]=$d;
+							$_SESSION['teamm4']=$teamm4;
 						}
 					}
 				}
