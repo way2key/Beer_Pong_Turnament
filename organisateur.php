@@ -31,7 +31,7 @@
 				}
 				$j=1;
 				$l=1;
-				for($i=0;$i<$m1;$i++){
+				for($i=0;$i<$m1/2;$i++){
 					for($k=0;$k<2;$k++){
 						$q=$db->prepare("UPDATE `equipes` SET POOL='$j' WHERE ID=$l"); 
 						$q->execute(); 
@@ -45,14 +45,23 @@
 				for($i=0;$i<$m1/2;$i++){
 					if(empty($_POST['t1'])){$_POST['t1']=[];}
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][1],"<br>";
-					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][0],"' ",notempty($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][1],"' ",notempty($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					if(!empty($_POST['t1'])){
+						$winner=wichwin($poolst1[$i][0],$poolst1[$i][1],$_POST['t1']);
+						$loser=wichlose($poolst1[$i][0],$poolst1[$i][1],$_POST['t1']);
+						$q=$db->prepare("UPDATE `equipes` SET Manche1='1' WHERE NAME='$winner' "); 
+						$q->execute(); 
+						$q=$db->prepare("UPDATE `equipes` SET Manche1='0' WHERE NAME='$loser' "); 
+						$q->execute();
+						$q->closeCursor();
+					}
 				}
 				echo "<input type='submit' name='Qui a gagné?'></form></div>";
 				if(!empty($_POST['t1'])){
 						$teamm2=$_POST['t1'];
 						$_SESSION['teamm2']=$_POST['t1'];
-					}
+				} 
 			}else{
 				$j=0;
 				for($i=0;$i<(floor($m1/2)-1);$i++){
@@ -91,8 +100,15 @@
 				if(empty($_POST['t1'])){$_POST['t1']=[];}
 				for($i=0;$i<($m1-3)/2;$i++){
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][1],"<br>";
-					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][0],"' ",notempty($_POST['t1'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='t1[]",$i+1,"' value='",$poolst1[$i][1],"' ",notempty($_POST['t1'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					$winner=wichwin($poolst1[$i][0],$poolst1[$i][1],$_POST['t1']);
+					$loser=wichlose($poolst1[$i][0],$poolst1[$i][1],$_POST['t1']);
+					$q=$db->prepare("UPDATE `equipes` SET Manche1='1' WHERE NAME='$winner' "); 
+					$q->execute(); 
+					$q=$db->prepare("UPDATE `equipes` SET Manche1='0' WHERE NAME='$loser' ");
+					$q->execute();  
+					$q->closeCursor();
 				}
 				if(empty($_POST['ti11'])){$_POST['ti11']=[];}
 				if(empty($_POST['ti12'])){$_POST['ti12']=[];}
@@ -100,16 +116,16 @@
 				for($i=($m1-3)/2;$i<(($m1-3)/2)+1;$i++){
 					$p=$i+1;
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][1],"<br>";
-					echo "<input type='radio' name='ti11[]",$p,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['ti11'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='radio' name='ti11[]",$p,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['ti11'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='ti11[]",$p,"' value='",$poolst1[$i][0],"' ",notempty($_POST['ti11'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='ti11[]",$p,"' value='",$poolst1[$i][1],"' ",notempty($_POST['ti11'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
 
 					echo $poolst1[$i][1]." VS ".$poolst1[$i][2],"<br>";
-					echo "<input type='radio' name='ti12[]",$p+1,"' value='",$poolst1[$i][1],"' ",notempty1($_POST['ti12'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
-					echo "<input type='radio' name='ti12[]",$p+1,"' value='",$poolst1[$i][2],"' ",notempty1($_POST['ti12'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
+					echo "<input type='radio' name='ti12[]",$p+1,"' value='",$poolst1[$i][1],"' ",notempty($_POST['ti12'],$poolst1[$i][1]),"> ",$poolst1[$i][1],"<br>";
+					echo "<input type='radio' name='ti12[]",$p+1,"' value='",$poolst1[$i][2],"' ",notempty($_POST['ti12'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
 
 					echo $poolst1[$i][0]." VS ".$poolst1[$i][2],"<br>";
-					echo "<input type='radio' name='ti13[]",$p+2,"' value='",$poolst1[$i][0],"' ",notempty1($_POST['ti13'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
-					echo "<input type='radio' name='ti13[]",$p+2,"' value='",$poolst1[$i][2],"' ",notempty1($_POST['ti13'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
+					echo "<input type='radio' name='ti13[]",$p+2,"' value='",$poolst1[$i][0],"' ",notempty($_POST['ti13'],$poolst1[$i][0]),"> ",$poolst1[$i][0],"<br>";
+					echo "<input type='radio' name='ti13[]",$p+2,"' value='",$poolst1[$i][2],"' ",notempty($_POST['ti13'],$poolst1[$i][2]),"> ",$poolst1[$i][2],"<br>";
 				}
 				echo "<input type='submit' name='Qui a gagné?'></form></div>";
 				if(!empty($_POST['ti11'])&&!empty($_POST['ti12'])&&!empty($_POST['ti13'])){
@@ -123,7 +139,14 @@
 					$vovo=array_count_values($total);
 					if(max($vovo)==1){
 						$teamm2=$_POST['t1'];
-						$teamm2[]=$total[rand(0,2)];
+						$random=$total[rand(0,2)];
+						$winner=$random;
+						$q=$db->prepare("UPDATE `equipes` SET Manche1='0' WHERE POOL='$m2'"); 
+						$q->execute(); 
+						$q=$db->prepare("UPDATE `equipes` SET Manche1='1' WHERE NAME='$winner' "); 
+						$q->execute(); 
+						$q->closeCursor();
+						$teamm2[]=$random;
 						$_SESSION['teamm2']=$teamm2;					
 					}
 					else{
@@ -144,22 +167,31 @@
 			if(!empty($_SESSION['teamm2'])&&$test>=4&&$count==$m2){
 				if($m2%2==0){
 					$j=0;
-					for($i=0;$i<($m3);$i++){
+					for($i=0;$i<($m2/2);$i++){
 						for($k=0;$k<2;$k++){
 							$poolst2[$i][]=$_SESSION['teamm2'][$j]; 
 							$j++;
 						}
 					}
-					$j=1;
 					$l=1;
+					$s=1;
 					for($i=0;$i<$m2/2;$i++){
-						for($k=0;$k<2;$k++){
-							$q=$db->prepare("UPDATE `equipes` SET POOL2='$j' WHERE ID=$l"); 
-							$q->execute(); 
+						$count=0;
+						while($count<$m3){
+							//UPDATE `equipes` SET `POOL2`= 1 WHERE ID IN (SELECT ID FROM (SELECT * FROM equipes) WHERE Manche1=1)
+
+							// echo $count;
+							//$q=$db->prepare("UPDATE `equipes` SET `POOL2`=1 WHERE ID IN (SELECT ID FROM equipes WHERE Manche1=1)"); 
+							//$q->execute(); 
+							//$q=$db->prepare("UPDATE `equipes` SET `POOL2`=$l WHERE Manche1='1' AND `ID`=$s"); 
+							//$q->execute(); 
 							$q->closeCursor();
-							$l++;
+							$s++;
+							$count++;
 						}
-						$j++;
+						
+						$l++;
+						
 					}
 					// questionnaire sur les qualifications du T2:
 					echo "<div id='t2'><h2>Tour 2: </h2><br><form method='post'>";
@@ -168,6 +200,15 @@
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
 						echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
 						echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						if(!empty($_POST['t2'])){
+							$winner=wichwin($poolst2[$i][0],$poolst2[$i][1],$_POST['t2']);
+							$loser=wichlose($poolst2[$i][0],$poolst2[$i][1],$_POST['t2']);
+							$q=$db->prepare("UPDATE `equipes` SET Manche2='1' WHERE NAME='$winner' "); 
+							$q->execute(); 
+							$q=$db->prepare("UPDATE `equipes` SET Manche2='0' WHERE NAME='$loser' "); 
+							$q->execute();
+							$q->closeCursor();
+						}
 					}
 					echo "<input type='submit' name='Qui a gagné?'></form><br></div>";
 					if(!empty($_POST['t2'])){
@@ -215,6 +256,13 @@
 							echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
 							echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
 							echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+							$winner=wichwin($poolst2[$i][0],$poolst2[$i][1],$_POST['t2']);
+							$loser=wichlose($poolst2[$i][0],$poolst2[$i][1],$_POST['t2']);
+							$q=$db->prepare("UPDATE `equipes` SET Manche2='1' WHERE NAME='$winner' "); 
+							$q->execute(); 
+							$q=$db->prepare("UPDATE `equipes` SET Manche2='0' WHERE NAME='$loser' "); 
+							$q->execute();
+							$q->closeCursor();
 						}
 					}else{
 					$_POST['t2']=[];
@@ -248,7 +296,14 @@
 						$vovo=array_count_values($total);
 						if(max($vovo)==1){
 							$teamm3=$_POST['t2'];
-							$teamm3[]=$total[rand(0,2)];
+							$random=$total[rand(0,2)];
+							$teamm3[]=$random;
+							$winner=$random;
+							$q=$db->prepare("UPDATE `equipes` SET Manche2='0' WHERE POOL='$m3'"); 
+							$q->execute(); 
+							$q=$db->prepare("UPDATE `equipes` SET Manche2='1' WHERE NAME='$winner' "); 
+							$q->execute(); 
+							$q->closeCursor();
 							$_SESSION['teamm3']=$teamm3;					
 						}
 						else{
@@ -295,6 +350,15 @@
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
 						echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
 						echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						if(!empty($_POST['t3'])){
+							$winner=wichwin($poolst3[$i][0],$poolst3[$i][1],$_POST['t3']);
+							$loser=wichlose($poolst3[$i][0],$poolst3[$i][1],$_POST['t3']);
+							$q=$db->prepare("UPDATE `equipes` SET Manche3='1' WHERE NAME='$winner' "); 
+							$q->execute(); 
+							$q=$db->prepare("UPDATE `equipes` SET Manche3='0' WHERE NAME='$loser' "); 
+							$q->execute();
+							$q->closeCursor();
+						}
 					}
 					echo "<input type='submit' name='Qui a gagné?'></form></div>";
 					if(!empty($_POST['t3'])){
@@ -343,6 +407,13 @@
 							echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
 							echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
 							echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+							$winner=wichwin($poolst3[$i][0],$poolst3[$i][1],$_POST['t3']);
+							$loser=wichlose($poolst3[$i][0],$poolst3[$i][1],$_POST['t3']);
+							$q=$db->prepare("UPDATE `equipes` SET Manche3='1' WHERE NAME='$winner' "); 
+							$q->execute(); 
+							$q=$db->prepare("UPDATE `equipes` SET Manche3='0' WHERE NAME='$loser' "); 
+							$q->execute();
+							$q->closeCursor();
 						}
 					}else{
 						$_POST['t3']=[];
@@ -376,7 +447,14 @@
 						$vovo=array_count_values($total);
 						if(max($vovo)==1){
 							$teamm4=$_POST['t3'];
-							$teamm4[]=$total[rand(0,2)];
+							$random=$total[rand(0,2)];
+							$teamm4[]=$random;
+							$winner=$random;
+							$q=$db->prepare("UPDATE `equipes` SET Manche3='0' WHERE POOL='$m4'"); 
+							$q->execute(); 
+							$q=$db->prepare("UPDATE `equipes` SET Manche3='1' WHERE NAME='$winner' "); 
+							$q->execute(); 
+							$q->closeCursor();
 							$_SESSION['teamm4']=$teamm4;					
 						}
 						else{
@@ -391,7 +469,7 @@
 			}
 
 
-			//Quattrième manche
+			//Quatrième manche
 			$poolst4=array();
 			//répartition des équipes dans les pools au 4eme tour
 			if(isset($_SESSION['teamm4'])){$count=count($_SESSION['teamm4']);}
@@ -423,6 +501,15 @@
 						echo $poolst4[$i][0]." VS ".$poolst4[$i][1],"<br>";
 						echo "<input type='radio' name='t4[]",$i+1,"' value='",$poolst4[$i][0],"' ",notempty4($_POST['t4'],$poolst4[$i][0]),"> ",$poolst4[$i][0],"<br>";
 						echo "<input type='radio' name='t4[]",$i+1,"' value='",$poolst4[$i][1],"' ",notempty4($_POST['t4'],$poolst4[$i][1]),"> ",$poolst4[$i][1],"<br>";
+						if(!empty($_POST['t4'])){
+							$winner=wichwin($poolst4[$i][0],$poolst4[$i][1],$_POST['t4']);
+							$loser=wichlose($poolst4[$i][0],$poolst4[$i][1],$_POST['t4']);
+							$q=$db->prepare("UPDATE `equipes` SET Finale='1' WHERE NAME='$winner' "); 
+							$q->execute(); 
+							$q=$db->prepare("UPDATE `equipes` SET Finale='0' WHERE NAME='$loser' "); 
+							$q->execute();
+							$q->closeCursor();
+						}
 					}
 					echo "<input type='submit' name='Qui a gagné?'></form></div>";
 				}else{
@@ -468,10 +555,31 @@
 		<?php
 		//Gestion des pools
 		//t1
-		/*
+/*
+		var_dump($poolst1);
+		if($m1%2==0){
+			for($i=0;$i<$m2;$i++){
+				echo "match",$i+1,"<br>";
+				for($j=0;$j<2;$j++){
+					echo $poolst1[$i][$j],"<br>";
+				}
+			}
+		}else{
+			for($i=0;$i<$m2-1;$i++){
+				echo "match",$i+1,"<br>";
+				for($j=0;$j<2;$j++){
+					echo $poolst1[$i][$j],"<br>";
+				}
+			}
+			for($i=$m2-3;$i<$m2-2;$i++){
+			$j=1;
+			}
+		}
+		
+/*
 		$t1=count($poolst1);
 		for($i=0;$i<$t1;$i++){
-			var_dump($poolst1[$i]);
+			//var_dump($poolst1[$i]);
 			for($j=0;$j<count($poolst1[$j]);$j++){
 				echo $j;
 			}
@@ -480,7 +588,7 @@
 		
 		$t2=count($poolst2);
 		for($i=0;$i<$t2;$i++){
-			var_dump($poolst1[$i]);
+			//var_dump($poolst1[$i]);
 			for($j=0;$j<count($poolst2[$j]);$j++){
 				echo $j;
 			}
@@ -488,7 +596,7 @@
 		//t3
 		$t3=count($poolst3);
 		for($i=0;$i<$t3;$i++){
-			var_dump($poolst1[$i]);
+			//var_dump($poolst1[$i]);
 			for($j=0;$j<count($poolst3[$j]);$j++){
 				echo $j;
 			}
@@ -500,7 +608,8 @@
 			for($j=0;$j<count($poolst4[$j]);$j++){
 				echo $j;
 			}
-		}*/
+		}
+		*/
 		?>
 	</body>
 </html>
