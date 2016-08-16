@@ -153,6 +153,10 @@
 						$d=array_search(max($vovo),$vovo);
 						$teamm2=$_POST['t1'];
 						$teamm2[]=$d;
+						//$q=$db->prepare("UPDATE `equipes` SET Manche1='0' WHERE POOL='$m2'"); 
+						//$q->execute(); 
+						$q=$db->prepare("UPDATE `equipes` SET Manche1='1' WHERE NAME='$d' "); 
+						$q->execute(); 
 						$_SESSION['teamm2']=$teamm2;
 					}
 				}
@@ -310,6 +314,10 @@
 							$d=array_search(max($vovo),$vovo);
 							$teamm3=$_POST['t2'];
 							$teamm3[]=$d;
+							//$q=$db->prepare("UPDATE `equipes` SET Manche2='0' WHERE POOL='$m3'"); 
+							//$q->execute();
+							$q=$db->prepare("UPDATE `equipes` SET Manche2='1' WHERE NAME='$d' "); 
+							$q->execute();
 							$_SESSION['teamm3']=$teamm3;
 						}
 					}
@@ -461,6 +469,10 @@
 							$d=array_search(max($vovo),$vovo);
 							$teamm4=$_POST['t3'];
 							$teamm4[]=$d;
+							//$q=$db->prepare("UPDATE `equipes` SET Manche3='0' WHERE POOL='$m4'"); 
+							//$q->execute(); 
+							$q=$db->prepare("UPDATE `equipes` SET Manche3='1' WHERE NAME='$d' "); 
+							$q->execute();
 							$_SESSION['teamm4']=$teamm4;
 						}
 					}
