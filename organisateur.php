@@ -14,6 +14,7 @@
 			$m2=$_SESSION['m2'];
 			$m3=$_SESSION['m3'];
 			$m4=$_SESSION['m4'];
+			$m5=$_SESSION['m5'];
 			$poolst1=array();
 			$teamm1=$_SESSION['equipe'];
 
@@ -167,7 +168,7 @@
 			//Deuxième manche
 			$poolst2=array();
 			//répartition des équipes dans les pools au 2eme tour
-			if(isset($_SESSION['teamm2'])){$count=count($_SESSION['teamm2']);}
+			if(isset($_SESSION['teamm2'])){$count=count($_SESSION['teamm2']);}else{$count=0;}
 			if(!empty($_SESSION['teamm2'])&&$test>=4&&$count==$m2){
 				if($m2%2==0){
 					$j=0;
@@ -177,25 +178,15 @@
 							$j++;
 						}
 					}
-					$l=1;
-					$s=1;
-					for($i=0;$i<$m2/2;$i++){
-						$count=0;
-						while($count<$m3){
-							//UPDATE `equipes` SET `POOL2`= 1 WHERE ID IN (SELECT ID FROM (SELECT * FROM equipes) WHERE Manche1=1)
-
-							// echo $count;
-							//$q=$db->prepare("UPDATE `equipes` SET `POOL2`=1 WHERE ID IN (SELECT ID FROM equipes WHERE Manche1=1)"); 
-							//$q->execute(); 
-							//$q=$db->prepare("UPDATE `equipes` SET `POOL2`=$l WHERE Manche1='1' AND `ID`=$s"); 
-							//$q->execute(); 
+					$ko=1;
+					for($i=0;$i<$m3;$i++){
+						for($j=0;$j<2;$j++){
+							$name=$poolst2[$i][$j];
+							$q=$db->prepare("UPDATE `equipes` SET POOL2='$ko' WHERE NAME='$name'");
+							$q->execute(); 
 							$q->closeCursor();
-							$s++;
-							$count++;
 						}
-						
-						$l++;
-						
+						$ko++;
 					}
 					// questionnaire sur les qualifications du T2:
 					echo "<div id='t2'><h2>Tour 2: </h2><br><form method='post'>";
@@ -325,11 +316,10 @@
 				$test=count($poolst2,COUNT_RECURSIVE);
 			}
 
-
 			//Troisième manche
 			$poolst3=array();
 			//répartition des équipes dans les pools au 3eme tour
-			if(isset($_SESSION['teamm3'])){$count=count($_SESSION['teamm3']);}
+			if(isset($_SESSION['teamm3'])){$count=count($_SESSION['teamm3']);}else{$count=0;}
 			if(!empty($_SESSION['teamm3'])&&$test>=4&&$count==$m3){
 				if($m3%2==0){
 					$j=0;
@@ -340,16 +330,15 @@
 							$j++;
 						}
 					}
-					$j=1;
-					$l=1;
-					for($i=0;$i<$m3/2;$i++){
-						for($k=0;$k<2;$k++){
-							$q=$db->prepare("UPDATE `equipes` SET POOL3='$j' WHERE ID=$l"); 
+					$ko=1;
+					for($i=0;$i<$m4;$i++){
+						for($j=0;$j<2;$j++){
+							$name=$poolst3[$i][$j];
+							$q=$db->prepare("UPDATE `equipes` SET POOL3='$ko' WHERE NAME='$name'");
 							$q->execute(); 
 							$q->closeCursor();
-							$l++;
 						}
-						$j++;
+						$ko++;
 					}	
 					// questionnaire sur les qualifications du T3:
 					echo "<div id='t3'><h2>Tour 3: </h2><br><form method='post'>";
@@ -484,7 +473,7 @@
 			//Quatrième manche
 			$poolst4=array();
 			//répartition des équipes dans les pools au 4eme tour
-			if(isset($_SESSION['teamm4'])){$count=count($_SESSION['teamm4']);}
+			if(isset($_SESSION['teamm4'])){$count=count($_SESSION['teamm4']);}else{$count=0;}
 			if(!empty($_SESSION['teamm4'])&&$test>=4&&$count==$m4){
 				if($m4%2==0){
 					$j=0;
@@ -495,17 +484,16 @@
 							$j++;
 						}
 					}
-					$j=1;
-					$l=1;
-					for($i=0;$i<$m4/2;$i++){
-						for($k=0;$k<2;$k++){
-							$q=$db->prepare("UPDATE `equipes` SET POOL4='$j' WHERE ID=$l"); 
+					$ko=1;
+					for($i=0;$i<$m5;$i++){
+						for($j=0;$j<2;$j++){
+							$name=$poolst4[$i][$j];
+							$q=$db->prepare("UPDATE `equipes` SET POOL4='$ko' WHERE NAME='$name'");
 							$q->execute(); 
 							$q->closeCursor();
-							$l++;
 						}
-						$j++;
-					}
+						$ko++;
+					}	
 					// questionnaire sur les qualifications du T4:
 					echo "<div id='t4'><h2>Tour 4: </h2><br><form method='post'>";
 					if(empty($_POST['t4'])){$_POST['t4']=[];}

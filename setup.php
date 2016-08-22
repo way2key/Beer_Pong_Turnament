@@ -10,6 +10,8 @@ $m3=floor($m2/2);
 $_SESSION['m3']=$m3;
 $m4=floor($m3/2);
 $_SESSION['m4']=$m4;
+$m5=floor($m4/2);
+$_SESSION['m5']=$m5;
 echo "<form method=post action='update.php'>";
 for($i=1;$i<$people+1;$i++){
 
