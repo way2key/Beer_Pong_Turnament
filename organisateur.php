@@ -219,28 +219,25 @@
 							$j++;
 						}
 					}
-					$j=1;
-					$l=1;
+					$ko=1;
 					for($i=0;$i<$m2/2-2;$i++){
 						for($k=0;$k<2;$k++){
-							$q=$db->prepare("UPDATE `equipes` SET POOL2='$j' WHERE ID=$l"); 
+							$name=$poolst2[$i][$k];
+							$q=$db->prepare("UPDATE `equipes` SET POOL2='$ko' WHERE NAME='$name'"); 
 							$q->execute(); 
 							$q->closeCursor();
-							$l++;
 						}
-						$j++;
+						$ko++;
 					}	
-					$s=$j;
-					$p=$l;
 					$j=$m2-3;
 					for($i=$i;$i<($m2/2)-1;$i++){
 						for($k=0;$k<3;$k++){
 							$poolst2[$i][]=$_SESSION['teamm2'][$j];
 							$j++;
-							$q=$db->prepare("UPDATE `equipes` SET POOL2='$s' WHERE ID=$p"); 
-							$q->execute(); 
+							$name=$poolst2[$i][$k];
+							$q=$db->prepare("UPDATE `equipes` SET POOL2='$ko' WHERE NAME='$name'"); 
+							$q->execute();
 							$q->closeCursor();
-							$p++;
 						}		
 					}
 					// questionnaire sur les qualifications du T2:
@@ -371,28 +368,25 @@
 							$j++;
 						}
 					}
-					$j=1;
-					$l=1;
+					$ko=1;
 					for($i=0;$i<$m3/2-2;$i++){
 						for($k=0;$k<2;$k++){
-							$q=$db->prepare("UPDATE `equipes` SET POOL3='$j' WHERE ID=$l"); 
+							$name=$poolst3[$i][$k];
+							$q=$db->prepare("UPDATE `equipes` SET POOL3='$ko' WHERE NAME='$name'"); 
 							$q->execute(); 
 							$q->closeCursor();
-							$l++;
 						}
-						$j++;
+						$ko++;
 					}	
-					$s=$j;
-					$p=$l;
 					$j=$m3-3;
 					for($i=$i;$i<($m3/2)-1;$i++){
 						for($k=0;$k<3;$k++){
 							$poolst3[$i][]=$_SESSION['teamm3'][$j];
 							$j++;
-							$q=$db->prepare("UPDATE `equipes` SET POOL3='$s' WHERE ID=$p"); 
-							$q->execute(); 
+							$name=$poolst3[$i][$k];
+							$q=$db->prepare("UPDATE `equipes` SET POOL3='$ko' WHERE NAME='$name'"); 
+							$q->execute();
 							$q->closeCursor();
-							$p++;
 						}		
 					}
 					// questionnaire sur les qualifications du T3:
@@ -521,28 +515,25 @@
 							$j++;
 						}
 					}
-					$j=1;
-					$l=1;
+					$ko=1;
 					for($i=0;$i<$m4/2-2;$i++){
 						for($k=0;$k<2;$k++){
-							$q=$db->prepare("UPDATE `equipes` SET POOL4='$j' WHERE ID=$l"); 
+							$name=$poolst4[$i][$k];
+							$q=$db->prepare("UPDATE `equipes` SET Finale='$ko' WHERE NAME='$name'"); 
 							$q->execute(); 
 							$q->closeCursor();
-							$l++;
 						}
-						$j++;
+						$ko++;
 					}	
-					$s=$j;
-					$p=$l;
 					$j=$m4-3;
 					for($i=$i;$i<($m4/2)-1;$i++){
 						for($k=0;$k<3;$k++){
 							$poolst4[$i][]=$_SESSION['teamm4'][$j];
 							$j++;
-							$q=$db->prepare("UPDATE `equipes` SET POOL4='$s' WHERE ID=$p"); 
-							$q->execute(); 
+							$name=$poolst4[$i][$k];
+							$q=$db->prepare("UPDATE `equipes` SET Finale='$ko' WHERE NAME='$name'"); 
+							$q->execute();
 							$q->closeCursor();
-							$p++;
 						}		
 					}
 				}
