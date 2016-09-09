@@ -24,21 +24,6 @@ if(!empty($value)){
     echo (in_array($needle, $value))? 'checked':'';
     }
 }
-function notempty2($value,$needle){
-if(!empty($value)){
-    echo (in_array($needle, $value))? 'checked':'';
-    }
-}
-function notempty3($value,$needle){
-if(!empty($value)){
-    echo (in_array($needle, $value))? 'checked':'';
-    }
-}
-function notempty4($value,$needle){
-if(!empty($value)){
-    echo (in_array($needle, $value))? 'checked':'';
-    }
-}
 function wichwin($player1,$player2,$set){
 if(in_array($player1, $set)){
     return $player1;
@@ -59,5 +44,9 @@ if(in_array($player1, $set)){
 }
 function winat3($player1,$player2,$player3,$set){
     return True;
+}
+
+function Howmanypools($players){
+if($players%2==0){return $players/2;}else{return floor($players/2);}
 }
 ?>

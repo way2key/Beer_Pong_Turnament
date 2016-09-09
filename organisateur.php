@@ -193,8 +193,8 @@
 					if(empty($_POST['t2'])){$_POST['t2']=[];}
 					for($i=0;$i<$m2/2;$i++){
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
-						echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-						echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][0],"' ",notempty($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+						echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][1],"' ",notempty($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
 						if(!empty($_POST['t2'])){
 							$winner=wichwin($poolst2[$i][0],$poolst2[$i][1],$_POST['t2']);
 							$loser=wichlose($poolst2[$i][0],$poolst2[$i][1],$_POST['t2']);
@@ -246,8 +246,8 @@
 						if(empty($_POST['t2'])){$_POST['t2']=[];}
 						for($i=0;$i<($m2-3)/2;$i++){
 							echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
-							echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-							echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+							echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][0],"' ",notempty($_POST['t2'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+							echo "<input type='radio' name='t2[]",$i+1,"' value='",$poolst2[$i][1],"' ",notempty($_POST['t2'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
 							$winner=wichwin($poolst2[$i][0],$poolst2[$i][1],$_POST['t2']);
 							$loser=wichlose($poolst2[$i][0],$poolst2[$i][1],$_POST['t2']);
 							$q=$db->prepare("UPDATE `equipes` SET Manche2='1' WHERE NAME='$winner' "); 
@@ -265,16 +265,16 @@
 					for($i=($m2-3)/2;$i<(($m2-3)/2)+1;$i++){
 						$p=$i+1;
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][1],"<br>";
-						echo "<input type='radio' name='ti21[]",$p,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti21'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-						echo "<input type='radio' name='ti21[]",$p,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti21'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						echo "<input type='radio' name='ti21[]",$p,"' value='",$poolst2[$i][0],"' ",notempty($_POST['ti21'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+						echo "<input type='radio' name='ti21[]",$p,"' value='",$poolst2[$i][1],"' ",notempty($_POST['ti21'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
 
 						echo $poolst2[$i][1]." VS ".$poolst2[$i][2],"<br>";
-						echo "<input type='radio' name='ti22[]",$p+1,"' value='",$poolst2[$i][1],"' ",notempty2($_POST['ti22'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
-						echo "<input type='radio' name='ti22[]",$p+1,"' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti22'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
+						echo "<input type='radio' name='ti22[]",$p+1,"' value='",$poolst2[$i][1],"' ",notempty($_POST['ti22'],$poolst2[$i][1]),"> ",$poolst2[$i][1],"<br>";
+						echo "<input type='radio' name='ti22[]",$p+1,"' value='",$poolst2[$i][2],"' ",notempty($_POST['ti22'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
 
 						echo $poolst2[$i][0]." VS ".$poolst2[$i][2],"<br>";
-						echo "<input type='radio' name='ti23[]",$p+2,"' value='",$poolst2[$i][0],"' ",notempty2($_POST['ti23'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
-						echo "<input type='radio' name='ti23[]",$p+2,"' value='",$poolst2[$i][2],"' ",notempty2($_POST['ti23'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
+						echo "<input type='radio' name='ti23[]",$p+2,"' value='",$poolst2[$i][0],"' ",notempty($_POST['ti23'],$poolst2[$i][0]),"> ",$poolst2[$i][0],"<br>";
+						echo "<input type='radio' name='ti23[]",$p+2,"' value='",$poolst2[$i][2],"' ",notempty($_POST['ti23'],$poolst2[$i][2]),"> ",$poolst2[$i][2],"<br>";
 					}
 					echo "<input type='submit' name='Qui a gagné?'></form></div>";
 					if(!empty($_POST['ti21'])&&!empty($_POST['ti22'])&&!empty($_POST['ti23'])){
@@ -342,8 +342,8 @@
 					if(empty($_POST['t3'])){$_POST['t3']=[];}
 					for($i=0;$i<$m3/2;$i++){
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
-						echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-						echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][0],"' ",notempty($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+						echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][1],"' ",notempty($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
 						if(!empty($_POST['t3'])){
 							$winner=wichwin($poolst3[$i][0],$poolst3[$i][1],$_POST['t3']);
 							$loser=wichlose($poolst3[$i][0],$poolst3[$i][1],$_POST['t3']);
@@ -396,8 +396,8 @@
 						for($i=0;$i<($m3-3)/2;$i++)
 						{
 							echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
-							echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-							echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+							echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][0],"' ",notempty($_POST['t3'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+							echo "<input type='radio' name='t3[]",$i+1,"' value='",$poolst3[$i][1],"' ",notempty($_POST['t3'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
 							$winner=wichwin($poolst3[$i][0],$poolst3[$i][1],$_POST['t3']);
 							$loser=wichlose($poolst3[$i][0],$poolst3[$i][1],$_POST['t3']);
 							$q=$db->prepare("UPDATE `equipes` SET Manche3='1' WHERE NAME='$winner' "); 
@@ -415,16 +415,16 @@
 					for($i=($m3-3)/2;$i<(($m3-3)/2)+1;$i++){
 						$p=$i+1;
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][1],"<br>";
-						echo "<input type='radio' name='ti31[]",$p,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti31'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-						echo "<input type='radio' name='ti31[]",$p,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti31'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						echo "<input type='radio' name='ti31[]",$p,"' value='",$poolst3[$i][0],"' ",notempty($_POST['ti31'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+						echo "<input type='radio' name='ti31[]",$p,"' value='",$poolst3[$i][1],"' ",notempty($_POST['ti31'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
 
 						echo $poolst3[$i][1]." VS ".$poolst3[$i][2],"<br>";
-						echo "<input type='radio' name='ti32[]",$p+1,"' value='",$poolst3[$i][1],"' ",notempty3($_POST['ti32'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
-						echo "<input type='radio' name='ti32[]",$p+1,"' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti32'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
+						echo "<input type='radio' name='ti32[]",$p+1,"' value='",$poolst3[$i][1],"' ",notempty($_POST['ti32'],$poolst3[$i][1]),"> ",$poolst3[$i][1],"<br>";
+						echo "<input type='radio' name='ti32[]",$p+1,"' value='",$poolst3[$i][2],"' ",notempty($_POST['ti32'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
 
 						echo $poolst3[$i][0]." VS ".$poolst3[$i][2],"<br>";
-						echo "<input type='radio' name='ti33[]",$p+2,"' value='",$poolst3[$i][0],"' ",notempty3($_POST['ti33'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
-						echo "<input type='radio' name='ti33[]",$p+2,"' value='",$poolst3[$i][2],"' ",notempty3($_POST['ti33'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
+						echo "<input type='radio' name='ti33[]",$p+2,"' value='",$poolst3[$i][0],"' ",notempty($_POST['ti33'],$poolst3[$i][0]),"> ",$poolst3[$i][0],"<br>";
+						echo "<input type='radio' name='ti33[]",$p+2,"' value='",$poolst3[$i][2],"' ",notempty($_POST['ti33'],$poolst3[$i][2]),"> ",$poolst3[$i][2],"<br>";
 					}
 					echo "<input type='submit' name='Qui a gagné?'></form></div>";
 					if(!empty($_POST['ti31'])&&!empty($_POST['ti32'])&&!empty($_POST['ti33'])){
@@ -493,8 +493,8 @@
 					if(empty($_POST['t4'])){$_POST['t4']=[];}
 					for($i=0;$i<$m4/2;$i++){
 						echo $poolst4[$i][0]." VS ".$poolst4[$i][1],"<br>";
-						echo "<input type='radio' name='t4[]",$i+1,"' value='",$poolst4[$i][0],"' ",notempty4($_POST['t4'],$poolst4[$i][0]),"> ",$poolst4[$i][0],"<br>";
-						echo "<input type='radio' name='t4[]",$i+1,"' value='",$poolst4[$i][1],"' ",notempty4($_POST['t4'],$poolst4[$i][1]),"> ",$poolst4[$i][1],"<br>";
+						echo "<input type='radio' name='t4[]",$i+1,"' value='",$poolst4[$i][0],"' ",notempty($_POST['t4'],$poolst4[$i][0]),"> ",$poolst4[$i][0],"<br>";
+						echo "<input type='radio' name='t4[]",$i+1,"' value='",$poolst4[$i][1],"' ",notempty($_POST['t4'],$poolst4[$i][1]),"> ",$poolst4[$i][1],"<br>";
 						if(!empty($_POST['t4'])){
 							$winner=wichwin($poolst4[$i][0],$poolst4[$i][1],$_POST['t4']);
 							$loser=wichlose($poolst4[$i][0],$poolst4[$i][1],$_POST['t4']);
