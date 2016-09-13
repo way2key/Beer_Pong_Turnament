@@ -2,6 +2,33 @@
 	<head>
 		<title>Beer Pong</title>
 		<meta charset="utf-8"> 
+		<style rel="stylesheet" type="text/css">
+			#M1{
+				display: flex;
+				justify-content: space-around;
+			}
+			#M2{
+				display: flex;
+				justify-content: space-around;
+			}
+			#M3{
+				display: flex;
+				justify-content: space-around;
+			}
+			#M4{
+				display: flex;
+				justify-content: space-around;
+			}
+			.Pool
+			{
+				justify-content: space-around;
+				border: 2px solid black;
+			}
+			.Match
+			{
+				display:inline-flex;
+			}
+		</style>
 	</head>
 	<body>
 	<h1>Classement du tournoi</h1>
@@ -10,60 +37,63 @@
 		<img src="BP.png">
 	</div> 
 
-	<div class="arbre">
-		<div class="Manche1">
-			<?php
-			session_start();
-			include "database.php";
-			$teamm1=$_SESSION['equipe'];
+	<?php
+		session_start();
+		include "database.php";
+		include "functions.php";
 			$m1=$_SESSION['m1'];
 			$m2=$_SESSION['m2'];
 			$m3=$_SESSION['m3'];
 			$m4=$_SESSION['m4'];
-			for ($i=0;$i<$m1;$i++){
-				echo $teamm1[$i]," ";
-			}
-			echo "<br";
-			?></div>
-		<div class="Manche2">
+	?>
+
+	<div id="arbre">
+		<div id="M1">
 			<?php
-			$q=$db->query("SELECT * FROM `equipes` WHERE Manche2=0");
-			while($row =$q->fetch()){ 
-				$teamm2[]=$row['NAME'];
+			for($a=1;$a<=Howmanypools($m1);$a++){
+				echo"<div class='Pool'> Pool $a </div>";
+				
+				for($i=0;$i<2;$i++){
+					echo "<div class='match'>Match</div>";
+				}
 			}
-			$m2=floor($m1/2);
-			for($i=0;$i<$m2;$i++){
-				echo $teamm2[$i]," ";
-			}
-			echo "<br>";
-			?></div>
-		<div class="Manche3">
+			?>		
+		</div>
+		<div id="M2">
 			<?php
-			$q=$db->query("SELECT * FROM `equipes` WHERE Manche3=0");
-			while($row =$q->fetch()){ 
-				$teamm3[]=$row['NAME'];
+			for($a=1;$a<=Howmanypools($m2);$a++){
+				echo"<div class='Pool'> Pool $a </div>";
+
+				for($i=0;$i<2;$i++){
+					echo "<div class='match'>Match</div>";
+				}
 			}
-			$m3=floor($m2/2);
-			for($i=0;$i<$m3;$i++){
-				echo $teamm3[$i]," ";
-			}
-			echo "<br>";
+			?>		
+		</div>
+		<div id="M3">
+			<?php
+				for($a=1;$a<=Howmanypools($m3);$a++){
+					echo"<div class='Pool'> Pool $a </div>";
+
+					for($i=0;$i<2;$i++){
+					echo "<div class='match'>Match</div>";
+				}
+				}
 			?>
-			</div>
-		<div class="Manche4">
+		</div>
+		<div id="M4">
 			<?php
-			$q=$db->query("SELECT * FROM `equipes` WHERE Manche4=0");
-			while($row =$q->fetch()){ 
-				$teamm4[]=$row['NAME'];
+			for($a=1;$a<=Howmanypools($m4);$a++){
+				echo"<div class='Pool'> Pool $a </div>";
+
+				for($i=0;$i<2;$i++){
+					echo "<div class='match'>Match</div>";
+				}
 			}
-			$m4=floor($m3/2);
-			for($i=0;$i<$m4;$i++){
-				echo $teamm4[$i]," ";
-			}
-			echo "<br>";
 			?>
-			</div>
-		
+		</div>
+	</div>
+
 	<div class="live">
 		<h1> Match en cours </h1>
 		<?php
@@ -75,7 +105,8 @@
 			echo ($count<1)? " <img src='vs.png'> ":"";
 			$count++;
 		}
-		?></div>
+		?>
+	</div>
 	
 	<div class="nextMatch">
 		<h1> Prochain Match </h1>
@@ -88,48 +119,58 @@
 			echo ($count<1)? " <img src='vs.png'> ":"";
 			$count++;
 		}
-		?></div>
+		?>
+	</div>
 </body>
 </html>
 
 <?php
 /*
-		session_start();
-		$equipe=$_SESSION['equipe'];
-		$people=$_SESSION['people'];
-		$pools=array();
-
-		//logique
-		if($people%2==0){
-			//pair
-			$j=0;
-			for($i=0;$i<($people/2);$i++){
-				for($k=0;$k<2;$k++){
-					$pools[$i][]=$equipe[$j];
-					$j++;
-				}
+<?php
+			session_start();
+			include "database.php";
+			$teamm1=$_SESSION['equipe'];
+			$m1=$_SESSION['m1'];
+			$m2=$_SESSION['m2'];
+			$m3=$_SESSION['m3'];
+			$m4=$_SESSION['m4'];
+			for ($i=0;$i<$m1;$i++){
+				echo $teamm1[$i]," ";
 			}
-			//affichage des pools
-			for($o=0;$o<($people/2);$o++){
-				echo "Pool ",$o+1,": <br>";
-				for($ol=0;$ol<2;$ol++){
-					echo $pools[$o][$ol];
-					echo ($ol==0)?  " vs ":  "";
-				}
-				echo "<br><br>";
+			echo "<br";
+			?>
+<?php
+			$q=$db->query("SELECT * FROM `equipes` WHERE Manche2=0");
+			while($row =$q->fetch()){ 
+				$teamm2[]=$row['NAME'];
 			}
-			//premier tour
-			for($i=0;$i<$people/2;$i++){
-				$match=(string)$pools[$i][0]." VS ".$pools[$i][1];
-				$pmatch="Pas encore disponible";
+			$m2=floor($m1/2);
+			for($i=0;$i<$m2;$i++){
+				echo $teamm2[$i]," ";
 			}
-		} elseif(($people-1)%2==0){
-			//impair
-			if($people%3==0){
-				//multiple de 3
-			} else{
-				//non divisible par 3
+			echo "<br>";
+			?>
+<?php
+			$q=$db->query("SELECT * FROM `equipes` WHERE Manche3=0");
+			while($row =$q->fetch()){ 
+				$teamm3[]=$row['NAME'];
 			}
-		}
+			$m3=floor($m2/2);
+			for($i=0;$i<$m3;$i++){
+				echo $teamm3[$i]," ";
+			}
+			echo "<br>";
+			?>
+<?php
+			$q=$db->query("SELECT * FROM `equipes` WHERE Finale=0");
+			while($row =$q->fetch()){ 
+				$teamm4[]=$row['NAME'];
+			}
+			$m4=floor($m3/2);
+			for($i=0;$i<$m4;$i++){
+				echo $teamm4[$i]," ";
+			}
+			echo "<br>";
+			?>
 		*/		
 ?>	
