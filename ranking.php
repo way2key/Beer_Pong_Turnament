@@ -3,6 +3,38 @@
 		<title>Beer Pong</title>
 		<meta charset="utf-8"> 
 		<style rel="stylesheet" type="text/css">
+		 	body{
+		 		%background-image: url("bg.png");
+		 		font-family: Lucida Console;
+		 		%color:red;
+		 		%font-variant: small-caps;
+		 	}
+		 	 @font-face 
+		 	 {
+		 	 	font-family: 'ballplay';
+		 		src:url('ballplay.ttf') format('truetype');
+		 	 }
+		 	.title{
+		 		font-family: 'ballplay';
+		 		font-size: 37px;
+		 		text-decoration: none;
+		 		line-height:1;
+		 		letter-spacing: 3px;
+		 	}
+		 	.img{
+		 		aposition: absolute;
+		 		right: auto;
+     			top: auto;
+
+		 	}
+			#arbre{
+				position:static;
+				 width:auto;
+				 %background-image: url("leaderboard.png");
+				 %background-size: cover;
+				 %	background-repeat: no-repeat;
+
+			}
 			#M1{
 				display: flex;
 				justify-content: space-around;
@@ -27,11 +59,23 @@
 			.Match
 			{
 				display:inline-flex;
+				
+			}
+			.Equipe
+			{	
+				display:inline-flex;
+				border: 2px solid red;
+				justify-content: space-around;
+				width: 50%;
+			}
+			.Win
+			{
+				border: 2px solid green;
 			}
 		</style>
 	</head>
 	<body>
-	<h1>Classement du tournoi</h1>
+	<div class="title">Classement du tournoi de </div>
 
 	<div class="img">
 		<img src="BP.png">
@@ -51,44 +95,83 @@
 		<div id="M1">
 			<?php
 			for($a=1;$a<=Howmanypools($m1);$a++){
-				echo"<div class='Pool'> Pool $a </div>";
-				
-				for($i=0;$i<2;$i++){
-					echo "<div class='match'>Match</div>";
+				echo"<div class='Pool'> Pool $a<br>";
+				$q=$db->query("SELECT * FROM `equipes` WHERE Pool=$a");
+				echo "<div class='match'>";
+				while($row =$q->fetch()){ 
+					$name=$row['NAME'];
+					echo "<div class='Equipe'>".$name."</div>";
 				}
+				echo "<br>";
+				$q=$db->query("SELECT * FROM `equipes` WHERE Pool=$a AND MANCHE1=1");
+				while($row =$q->fetch()){ 
+					$name=$row['NAME'];
+					echo "<div class='Win'>".$name."</div>";
+				}
+				echo "</div></div>";
+
 			}
-			?>		
+
+			?>	
+			
 		</div>
 		<div id="M2">
 			<?php
 			for($a=1;$a<=Howmanypools($m2);$a++){
-				echo"<div class='Pool'> Pool $a </div>";
-
-				for($i=0;$i<2;$i++){
-					echo "<div class='match'>Match</div>";
+				echo"<div class='Pool'> Pool $a<br>";
+				$q=$db->query("SELECT * FROM `equipes` WHERE Pool2=$a AND MANCHE1=1");
+				echo "<div class='match'>";
+				while($row =$q->fetch()){ 
+					$name=$row['NAME'];
+					echo "<div class='Equipe'>".$name."</div>";
 				}
+				echo "<br>";
+				$q=$db->query("SELECT * FROM `equipes` WHERE Pool2=$a AND MANCHE2=1");
+				while($row =$q->fetch()){ 
+					$name=$row['NAME'];
+					echo "<div class='Win'>".$name."</div>";
+				}
+				echo "</div></div>";
 			}
 			?>		
 		</div>
 		<div id="M3">
 			<?php
 				for($a=1;$a<=Howmanypools($m3);$a++){
-					echo"<div class='Pool'> Pool $a </div>";
-
-					for($i=0;$i<2;$i++){
-					echo "<div class='match'>Match</div>";
+					echo"<div class='Pool'> Pool $a<br>";
+				$q=$db->query("SELECT * FROM `equipes` WHERE Pool3=$a AND MANCHE2=1");
+				echo "<div class='match'>";
+				while($row =$q->fetch()){ 
+					$name=$row['NAME'];
+					echo "<div class='Equipe'>".$name."</div>";
 				}
+				echo "<br>";
+				$q=$db->query("SELECT * FROM `equipes` WHERE Pool3=$a AND MANCHE3=1");
+				while($row =$q->fetch()){ 
+					$name=$row['NAME'];
+					echo "<div class='Win'>".$name."</div>";
+				}
+				echo "</div></div>";
 				}
 			?>
 		</div>
 		<div id="M4">
 			<?php
 			for($a=1;$a<=Howmanypools($m4);$a++){
-				echo"<div class='Pool'> Pool $a </div>";
-
-				for($i=0;$i<2;$i++){
-					echo "<div class='match'>Match</div>";
+				echo"<div class='Pool'> Pool $a<br>";
+				$q=$db->query("SELECT * FROM `equipes` WHERE Pool4=$a AND MANCHE3=1");
+				echo "<div class='match'>";
+				while($row =$q->fetch()){ 
+					$name=$row['NAME'];
+					echo "<div class='Equipe'>".$name."</div>";
 				}
+				echo "<br>";
+				$q=$db->query("SELECT * FROM `equipes` WHERE Pool4=$a AND FINALE=1");
+				while($row =$q->fetch()){ 
+					$name=$row['NAME'];
+					echo "<div class='Win'>".$name."</div>";
+				}
+				echo "</div></div>";
 			}
 			?>
 		</div>
@@ -107,7 +190,7 @@
 		}
 		?>
 	</div>
-	
+
 	<div class="nextMatch">
 		<h1> Prochain Match </h1>
 		<?php
